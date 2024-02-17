@@ -62,9 +62,39 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Order $order)
+    public function show($id)
     {
-        //
+        try {
+
+            $orders = Order::query()
+                ->select('id', 'subtotal', 'priority', 'deliver')
+                ->where('id', $id)
+                ->with(['items' => function ($query) {
+                    $query->select('id', 'product_id', 'order_id', 'quantity', 'unit_price', 'total_price')
+                        ->with(['product' => function ($query) {
+                            $query->select('id', 'name', 'stock')->with(['suppliers' => function ($query) {
+                                $query->select('id', 'name', 'mobile', 'email');
+                            }]);
+                        }]);
+                }])
+                ->orderBy('priority')
+                ->first();
+
+            return response()->json([
+                'response' => 'success',
+                'data' => [
+                    'order' => $orders
+                ],
+                'error' => null
+            ]);
+
+        } catch (Exception $exception) {
+            return response()->json([
+                'response' => 'error',
+                'data' => null,
+                'error' => $exception->getMessage()
+            ], 500);
+        }
     }
 
     /**

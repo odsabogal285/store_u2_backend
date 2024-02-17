@@ -30,6 +30,7 @@ Route::group(['prefix' => 'v1'], function () {
 
 
         Route::post('/orders-date', [OrderController::class, 'index']);
+        Route::get('/orders/{id}/show', [OrderController::class, 'show']);
 
     });
 
