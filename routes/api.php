@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,11 @@ Route::group(['prefix' => 'v1'], function () {
 
     Route::group(['middleware' => 'jwt.verify'], function () {
         Route::get('/me', [AuthController::class, 'me']);
-        Route::post('/logout', [AuthController::class, 'logout']);;
+        Route::post('/logout', [AuthController::class, 'logout']);
+
+
+        Route::post('/orders-date', [OrderController::class, 'index']);
+
     });
 
 });
