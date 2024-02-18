@@ -56,7 +56,7 @@ class AuthController extends Controller
                     return response()->json([
                         'response' => 'error',
                         'data' => null,
-                        'error' => 'Credenciales no validas.'
+                        'error' => 'Credenciales no válidas.'
                     ], 401);
                 }
 
@@ -118,7 +118,7 @@ class AuthController extends Controller
             return response()->json([
                 'response' => 'success',
                 'data' => [
-                    'message' => 'Successfully logged out ',
+                    'message' => 'Cerró sesión exitosamente',
                 ],
                 'error' => null
             ]);
