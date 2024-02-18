@@ -18,15 +18,19 @@ class ItemFactory extends Factory
     public function definition(): array
     {
 
-        $products_id = DB::table('products')->pluck('id');
-        $orders_id = DB::table('orders')->pluck('id');
+        $products = DB::table('products')->get();
+        $product_id = fake()->randomElement($products->pluck('id'));
+        $product = $products->where('id',$product_id)->first();
+
+        $unitPrice = $product->price;
+        $quantity = fake()->randomNumber(2);
+        $totalPrice = $unitPrice * $quantity;
 
         return [
-            'product_id' => fake()->randomElement($products_id),
-            'order_id' => fake()->randomElement($orders_id),
-            'quantity' => fake()->randomNumber(2),
-            'unit_price' => fake()->randomNumber(2),
-            'total_price' => fake()->randomNumber(2)
+            'product_id' => $product_id,
+            'quantity' => $quantity,
+            'unit_price' => $unitPrice,
+            'total_price' => $totalPrice
         ];
     }
 }

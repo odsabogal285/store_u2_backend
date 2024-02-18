@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->double('subtotal');
+            $table->double('subtotal')->default(0);
             $table->integer('priority');
             $table->date('deliver');
             $table->timestamps();
