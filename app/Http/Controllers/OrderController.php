@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Order\IndexOrderRequest;
+use App\Http\Requests\Order\ShowOrderRequest;
 use App\Models\Order;
 use Exception;
 use Illuminate\Http\Request;
@@ -11,7 +13,7 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(IndexOrderRequest $request)
     {
         try {
 
@@ -52,17 +54,9 @@ class OrderController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(ShowOrderRequest $request, $id)
     {
         try {
 
@@ -97,19 +91,4 @@ class OrderController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Order $order)
-    {
-        //
-    }
 }
